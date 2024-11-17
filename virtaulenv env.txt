@@ -1,0 +1,19 @@
+
+https://www.django-rest-framework.org/
+
+virtaulenv env
+pip install django
+pip install django-filter
+pip install markdown
+pip install djangorestframework
+pip install pillow
+
+
+
+
+
+
+
+
+
+npx create-next-app@latest
