@@ -50,7 +50,7 @@ const Page = () => {
     return (
         <div className="border p-20 w-[50%] mx-auto shadow-2xl rounded-2xl mt-20">
             <Link
-                href="/pages/register"
+                href="/register"
                 className="bg-green-400 h-10 w-10 block flex items-center justify-center fixed top-[60%] right-[25%] rounded-full shadow-md"
             >
                 <IoPersonAddOutline />

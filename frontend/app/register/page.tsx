@@ -14,7 +14,7 @@ export default function Create() {
     const handleSubmit = (e) => {
         e.preventDefault();
         axios.post('http://127.0.0.1:8000/api/patient/', { full_name, phone, dob, gender })
-            .then(() => router.push('/pages/home'))
+            .then(() => router.push('/home'))
             .catch(error => console.error(error));
     };
 
