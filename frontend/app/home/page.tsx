@@ -1,5 +1,4 @@
 "use client";
-
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Link from "next/link";
@@ -20,6 +19,7 @@ const Page = () => {
             .get(currentLink)
             .then((response) => {
                 const data = response.data;
+                console.log(data)
                 setPatients(data.results || []);
                 setNextLink(data.next || null);
                 setPrevLink(data.previous || null);
@@ -29,7 +29,7 @@ const Page = () => {
                 console.error("Error fetching patients:", error);
             });
     }, [currentLink]);
-
+    console.log(nextLink)
     // Handle delete operation
     const handleDelete = (id) => {
         if (confirm("Are you sure you want to delete this item?")) {
@@ -46,7 +46,6 @@ const Page = () => {
                 });
         }
     };
-
     return (
         <div className="border p-20 w-[50%] mx-auto shadow-2xl rounded-2xl mt-20">
             <Link
