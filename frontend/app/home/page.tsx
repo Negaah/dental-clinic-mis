@@ -1,51 +1,45 @@
 "use client";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import Link from "next/link";
 import { IoPersonAddOutline } from "react-icons/io5";
 import { GrUpdate } from "react-icons/gr";
 import { MdDelete } from "react-icons/md";
+import { apiRequest } from "../utils/auth"; // Import the utility file
 
 const Page = () => {
-    const [patients, setPatients] = useState([]); // Store patient data
-    const [nextLink, setNextLink] = useState(null); // Next page link
-    const [prevLink, setPrevLink] = useState(null); // Previous page link
-    const [count, setCount] = useState(0); // Total count
-    const [currentLink, setCurrentLink] = useState("http://localhost:8000/api/patient/"); // Current link
+    const [patients, setPatients] = useState([]);
+    const [nextLink, setNextLink] = useState(null);
+    const [prevLink, setPrevLink] = useState(null);
+    const [count, setCount] = useState(0);
+    const [currentLink, setCurrentLink] = useState("/api/patient/");
 
     // Fetch data whenever `currentLink` changes
     useEffect(() => {
-        axios
-            .get(currentLink)
-            .then((response) => {
-                const data = response.data;
-                console.log(data)
+        const fetchData = async () => {
+            const data = await apiRequest(currentLink, "get");
+            if (data) {
                 setPatients(data.results || []);
                 setNextLink(data.next || null);
                 setPrevLink(data.previous || null);
                 setCount(data.count || 0);
-            })
-            .catch((error) => {
-                console.error("Error fetching patients:", error);
-            });
+            }
+        };
+        fetchData();
     }, [currentLink]);
-    console.log(nextLink)
+
     // Handle delete operation
-    const handleDelete = (id) => {
+    const handleDelete = async (id) => {
         if (confirm("Are you sure you want to delete this item?")) {
-            axios
-                .delete(`http://127.0.0.1:8000/api/patient/${id}/`)
-                .then(() => {
-                    // Update state to remove deleted item
-                    setPatients((prevPatients) => prevPatients.filter((patient) => patient.id !== id));
-                    alert("Item deleted successfully!");
-                })
-                .catch((error) => {
-                    console.error("Error deleting item:", error);
-                    alert("Failed to delete the item.");
-                });
+            const success = await apiRequest(`/api/patient/${id}/`, "delete");
+            if (success) {
+                setPatients((prevPatients) => prevPatients.filter((patient) => patient.id !== id));
+                alert("Item deleted successfully!");
+            } else {
+                alert("Failed to delete the item.");
+            }
         }
     };
+
     return (
         <div className="border p-20 w-[50%] mx-auto shadow-2xl rounded-2xl mt-20">
             <Link
