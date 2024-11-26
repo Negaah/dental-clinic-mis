@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './not-found.module.css';
-
+// NOT FOUND PAGE 
 
 const Custom404 = () => {
   return (
