@@ -1,10 +1,15 @@
 from django.urls import path, include
 
 from rest_framework.routers import DefaultRouter
-from .views import MyTokenObtainPairView, MyTokenRefreshView,PatientViewSet,register
+from .views import PatientViewSet, DentistViewSet, AppointmentViewSet, TreatmentViewSet, TreatmentRecordViewSet, InvoiceViewSet,MyTokenObtainPairView, MyTokenRefreshView,register
 
 router = DefaultRouter()
-router.register(r'patient', PatientViewSet)
+router.register(r'patients', PatientViewSet)
+router.register(r'dentists', DentistViewSet)
+router.register(r'appointments', AppointmentViewSet)
+router.register(r'treatments', TreatmentViewSet)
+router.register(r'treatment-records', TreatmentRecordViewSet)
+router.register(r'invoices', InvoiceViewSet)
 
 urlpatterns = [
     path('api/token/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),

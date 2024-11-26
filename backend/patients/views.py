@@ -1,19 +1,15 @@
 
 from rest_framework import viewsets
-from .models import Patient
-from .serializers import PatientSerializer
 from rest_framework.permissions import IsAuthenticated
-
-
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
-
-
-
-
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .serializers import UserRegistrationSerializer
+from .models import Patient, Dentist, Appointment, Treatment, TreatmentRecord, Invoice
+from .serializers import PatientSerializer, DentistSerializer, AppointmentSerializer, TreatmentSerializer, TreatmentRecordSerializer, InvoiceSerializer
+
+
 
 @api_view(['POST'])
 def register(request):
@@ -34,7 +30,27 @@ class MyTokenRefreshView(TokenRefreshView):
 
 
 
+
 class PatientViewSet(viewsets.ModelViewSet):
     queryset = Patient.objects.all()
     serializer_class = PatientSerializer
-    permission_classes = [IsAuthenticated]
+
+class DentistViewSet(viewsets.ModelViewSet):
+    queryset = Dentist.objects.all()
+    serializer_class = DentistSerializer
+
+class AppointmentViewSet(viewsets.ModelViewSet):
+    queryset = Appointment.objects.all()
+    serializer_class = AppointmentSerializer
+
+class TreatmentViewSet(viewsets.ModelViewSet):
+    queryset = Treatment.objects.all()
+    serializer_class = TreatmentSerializer
+
+class TreatmentRecordViewSet(viewsets.ModelViewSet):
+    queryset = TreatmentRecord.objects.all()
+    serializer_class = TreatmentRecordSerializer
+
+class InvoiceViewSet(viewsets.ModelViewSet):
+    queryset = Invoice.objects.all()
+    serializer_class = InvoiceSerializer
