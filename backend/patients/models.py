@@ -9,7 +9,7 @@ class Patient(models.Model):
     medical_history = models.TextField(blank=True, null=True)
 
     def __str__(self):
-        return f"{self.first_name} {self.last_name}"
+        return self.full_name
 
 # مدل پزشکان
 class Dentist(models.Model):
