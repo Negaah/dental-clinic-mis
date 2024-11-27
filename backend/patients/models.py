@@ -9,7 +9,7 @@ class Patient(models.Model):
     medical_history = models.TextField(blank=True, null=True)
 
     def __str__(self):
-        return f"{self.first_name} {self.last_name}"
+        return f"{self.full_name}"
 
 # مدل پزشکان
 class Dentist(models.Model):
@@ -22,7 +22,7 @@ class Dentist(models.Model):
     office_hours = models.TextField()
 
     def __str__(self):
-        return f"{self.first_name} {self.last_name} - {self.specialization}"
+        return f"{self.first_name} {self.last_name}"
 
 # مدل قرار ملاقات‌ها
 class Appointment(models.Model):
