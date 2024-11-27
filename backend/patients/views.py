@@ -30,7 +30,6 @@ class MyTokenRefreshView(TokenRefreshView):
 
 
 
-
 class PatientViewSet(viewsets.ModelViewSet):
     queryset = Patient.objects.all()
     serializer_class = PatientSerializer
