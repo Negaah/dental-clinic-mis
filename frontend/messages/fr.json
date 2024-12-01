@@ -1,0 +1,12 @@
+{
+  "header": {
+    "searchPlaceholder": "جستجو...",
+    "logo": "لوگو"
+  },
+  "sidebar": {
+    "dashboard": "داشبورد",
+    "appointments": "وقت ملاقات‌ها",
+    "patients": "بیماران"
+  },
+  "footer": "پاورقی"
+}

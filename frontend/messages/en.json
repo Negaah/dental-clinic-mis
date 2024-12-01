@@ -1,0 +1,12 @@
+{
+  "header": {
+    "searchPlaceholder": "Search...",
+    "logo": "Logo"
+  },
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "appointments": "Appointments",
+    "patients": "Patients"
+  },
+  "footer": "Footer"
+}
