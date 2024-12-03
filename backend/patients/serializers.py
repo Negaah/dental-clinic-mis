@@ -29,10 +29,22 @@ class DentistSerializer(serializers.ModelSerializer):
         model = Dentist
         fields = '__all__'
 
+
 class AppointmentSerializer(serializers.ModelSerializer):
+    # Read-only fields for displaying names instead of IDs
+    patient_name = serializers.CharField(source='patient.full_name', read_only=True)
+    dentist_name = serializers.CharField(source='dentist.full_name', read_only=True)
+
     class Meta:
         model = Appointment
-        fields = '__all__'
+        fields = ['id', 'patient', 'dentist', 'patient_name', 'dentist_name', 
+                  'appointment_date', 'appointment_time', 'status', 'notes']
+        extra_kwargs = {
+            'patient': {'write_only': True},  # Patient ID used for creation/update
+            'dentist': {'write_only': True},  # Dentist ID used for creation/update
+        }
+
+
 
 class TreatmentSerializer(serializers.ModelSerializer):
     class Meta:

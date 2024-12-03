@@ -49,8 +49,8 @@ const Appointments = () => {
               } hover:bg-blue-100 transition-colors`}
             >
               <td className="px-4 py-2 text-sm border-b border-gray-200">{index + 1}</td>
-              <td className="px-4 py-2 text-sm border-b border-gray-200">{appointment.patient}</td>
-              <td className="px-4 py-2 text-sm border-b border-gray-200">{appointment.dentist}</td>
+              <td className="px-4 py-2 text-sm border-b border-gray-200">{appointment.patient_name}</td>
+              <td className="px-4 py-2 text-sm border-b border-gray-200">{appointment.patient_name}</td>
               <td className="px-4 py-2 text-sm border-b border-gray-200">{appointment.appointment_date}</td>
               <td className="px-4 py-2 text-sm border-b border-gray-200">{appointment.appointment_time}</td>
               <td className="px-4 py-2 text-sm border-b border-gray-200">
@@ -59,14 +59,14 @@ const Appointments = () => {
                     appointment.status === "Scheduled"
                       ? "bg-yellow-100 text-yellow-600"
                       : appointment.status === "Completed"
-                      ? "bg-green-100 text-blue-600"
+                      ? "bg-green-100 text-green-600"
                       : "bg-red-100 text-red-600"
                   }`}
                 >
                   {appointment.status}
                 </span>
               </td>
-              
+
               <td className="px-4 py-2 text-sm border-b border-gray-200">
                 {appointment.notes || "N/A"}
               </td>
