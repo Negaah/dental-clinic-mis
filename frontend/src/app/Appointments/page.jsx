@@ -44,9 +44,8 @@ const Appointments = () => {
           {data.map((appointment, index) => (
             <tr
               key={appointment.id}
-              className={`${
-                index % 2 === 0 ? "bg-gray-50" : "bg-white"
-              } hover:bg-blue-100 transition-colors`}
+              className={`${index % 2 === 0 ? "bg-gray-50" : "bg-white"
+                } hover:bg-blue-100 transition-colors`}
             >
               <td className="px-4 py-2 text-sm border-b border-gray-200">{index + 1}</td>
               <td className="px-4 py-2 text-sm border-b border-gray-200">{appointment.patient_name}</td>
@@ -55,13 +54,12 @@ const Appointments = () => {
               <td className="px-4 py-2 text-sm border-b border-gray-200">{appointment.appointment_time}</td>
               <td className="px-4 py-2 text-sm border-b border-gray-200">
                 <span
-                  className={`px-3 py-1 inline-flex text-xs font-semibold rounded-full ${
-                    appointment.status === "Scheduled"
-                      ? "bg-yellow-100 text-yellow-600"
-                      : appointment.status === "Completed"
+                  className={`px-3 py-1 inline-flex text-xs font-semibold rounded-full ${appointment.status === "Scheduled"
+                    ? "bg-yellow-100 text-yellow-600"
+                    : appointment.status === "Completed"
                       ? "bg-green-100 text-green-600"
                       : "bg-red-100 text-red-600"
-                  }`}
+                    }`}
                 >
                   {appointment.status}
                 </span>
