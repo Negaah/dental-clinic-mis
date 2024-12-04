@@ -76,34 +76,12 @@ export default function RootLayout({
           </aside>
 
           {/* Main */}
-          <main className="col-span-7 bg-white">
-            <div className="min-h-screen font-[family-name:var(--font-geist-sans)]">
-              {children}
-            </div>
-          </main>
+
+          {children}
+
 
           {/* Right Section */}
-          <section className="col-span-3 bg-gray-50 p-4 space-y-4">
-            <div className="bg-white p-4 shadow rounded-md">
-              <h2 className="text-lg font-medium text-gray-800 mb-3">
-                Form Submit
-              </h2>
-              <form className="space-y-3">
-                <input
-                  type="text"
-                  placeholder="Enter details"
-                  className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-400 focus:border-blue-400"
-                />
-                <button
-                  type="submit"
-                  className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition-all"
-                >
-                  Submit
-                </button>
-              </form>
-            </div>
-          <CreatePatientForm />
-          </section>
+
 
 
           {/* Footer */}

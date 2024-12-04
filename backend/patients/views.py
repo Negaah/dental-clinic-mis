@@ -8,6 +8,7 @@ from rest_framework.decorators import api_view
 from .serializers import UserRegistrationSerializer
 from .models import Patient, Dentist, Appointment, Treatment, TreatmentRecord, Invoice
 from .serializers import PatientSerializer, DentistSerializer, AppointmentSerializer, TreatmentSerializer, TreatmentRecordSerializer, InvoiceSerializer
+from rest_framework.filters import SearchFilter
 
 
 
@@ -29,10 +30,13 @@ class MyTokenRefreshView(TokenRefreshView):
     pass
 
 
-
 class PatientViewSet(viewsets.ModelViewSet):
     queryset = Patient.objects.all()
     serializer_class = PatientSerializer
+    filter_backends = [SearchFilter]
+    search_fields = ['full_name', 'phone', 'address','gender']
+
+
 
 class DentistViewSet(viewsets.ModelViewSet):
     queryset = Dentist.objects.all()
