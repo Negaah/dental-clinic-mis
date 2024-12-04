@@ -2,6 +2,8 @@
 import { useEffect, useState } from "react";
 import apiClient from "../lib/api";
 import CreatePatientForm from "../../components/form_patients";
+// ICON part
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 const Patients = () => {
   const [data, setData] = useState([]); // To store the patient data
@@ -16,7 +18,7 @@ const Patients = () => {
   const fetchData = async (url) => {
     try {
       const response = await apiClient.get(url); // Fetch data from API
-      console.log(response.data)
+      console.log(response.data);
       setData(response.data.results || []); // Update the data state
       setNextLink(response.data.next || null); // Set next page URL
       setPrevLink(response.data.previous || null); // Set previous page URL
@@ -43,46 +45,83 @@ const Patients = () => {
         <thead className="bg-gradient-to-r from-blue-500 to-blue-600 text-white">
           <tr>
             <th className="px-4 py-2 text-left text-sm font-semibold">ID</th>
-            <th className="px-4 py-2 text-left text-sm font-semibold">Full Name</th>
+            <th className="px-4 py-2 text-left text-sm font-semibold">
+              Full Name
+            </th>
             <th className="px-4 py-2 text-left text-sm font-semibold">DOB</th>
-            <th className="px-4 py-2 text-left text-sm font-semibold">Gender</th>
-            <th className="px-4 py-2 text-left text-sm font-semibold">Phone #</th>
-            <th className="px-4 py-2 text-left text-sm font-semibold">Address</th>
+            <th className="px-4 py-2 text-left text-sm font-semibold">
+              Gender
+            </th>
+            <th className="px-4 py-2 text-left text-sm font-semibold">
+              Phone #
+            </th>
+            <th className="px-4 py-2 text-left text-sm font-semibold">
+              Address
+            </th>
           </tr>
         </thead>
         <tbody>
           {data.map((patient, index) => (
             <tr
               key={patient.id}
-              className={`${index % 2 === 0 ? "bg-gray-50" : "bg-white"} hover:bg-blue-100 transition-colors`}
+              className={`${
+                index % 2 === 0 ? "bg-gray-50" : "bg-white"
+              } hover:bg-blue-100 transition-colors`}
             >
-              <td className="px-4 py-2 text-sm border-b border-gray-200">{patient.id}</td>
-              <td className="px-4 py-2 text-sm border-b border-gray-200">{patient.full_name}</td>
-              <td className="px-4 py-2 text-sm border-b border-gray-200">{patient.dob}</td>
-              <td className="px-4 py-2 text-sm border-b border-gray-200">{patient.gender}</td>
-              <td className="px-4 py-2 text-sm border-b border-gray-200">{patient.phone}</td>
-              <td className="px-4 py-2 text-sm border-b border-gray-200">{patient.address}</td>
+              <td className="px-4 py-2 text-sm border-b border-gray-200">
+                {patient.id}
+              </td>
+              <td className="px-4 py-2 text-sm border-b border-gray-200">
+                {patient.full_name}
+              </td>
+              <td className="px-4 py-2 text-sm border-b border-gray-200">
+                {patient.dob}
+              </td>
+              <td className="px-4 py-2 text-sm border-b border-gray-200">
+                {patient.gender}
+              </td>
+              <td className="px-4 py-2 text-sm border-b border-gray-200">
+                {patient.phone}
+              </td>
+              <td className="px-4 py-2 text-sm border-b border-gray-200">
+                {patient.address}
+              </td>
             </tr>
           ))}
         </tbody>
       </table>
 
-      Pagination Controls
-      <div className="flex justify-between items-center">
+      {/* Pagination Controls */}
+      <div className="flex justify-between items-center mt-4 px-4">
         <button
           disabled={!prevLink}
           onClick={() => setCurrentLink(prevLink)}
-          className="px-4 py-2 bg-blue-500 text-white rounded disabled:bg-gray-300"
+          className={`flex items-center space-x-2 px-4 py-2 text-sm font-medium rounded-md shadow-sm transition-colors ${
+            prevLink
+              ? "bg-gradient-to-r from-blue-500 to-blue-600 text-white hover:from-blue-600 hover:to-blue-700"
+              : "bg-gray-300 text-gray-500 cursor-not-allowed"
+          }`}
         >
-          Previous
+          <FaArrowLeft className="w-4 h-4" /> {/* Left arrow icon */}
+          <span>Previous</span>
         </button>
-        <span className="text-sm text-gray-700">{`Showing ${data.length} of ${count} patients`}</span>
+        <div className="flex items-center space-x-2 text-sm">
+          <span className="font-medium text-gray-700">Page:</span>
+          <span className="bg-gray-100 px-3 py-1 rounded-md font-medium text-blue-600 shadow-sm">
+            {Math.ceil(data.length / 10)} of {Math.ceil(count / 10)}
+          </span>
+        </div>
         <button
           disabled={!nextLink}
           onClick={() => setCurrentLink(nextLink)}
-          className="px-4 py-2 bg-blue-500 text-white rounded disabled:bg-gray-300"
+          className={`flex items-center space-x-2 px-4 py-2 text-sm font-medium rounded-md shadow-sm transition-colors ${
+            nextLink
+              ? "bg-gradient-to-r from-blue-500 to-blue-600 text-white hover:from-blue-600 hover:to-blue-700"
+              : "bg-gray-300 text-gray-500 cursor-not-allowed"
+          }`}
         >
-          Next
+          <span>Next</span>
+          <FaArrowRight className="w-4 h-4" /> {/* Right arrow icon */}
         </button>
       </div>
     </div>
