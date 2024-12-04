@@ -43,7 +43,7 @@ export default function RootLayout({
           </header>
 
           {/* Sidebar */}
-          <aside className="col-span-2 bg-white border border-gray-200 shadow-lg rounded-lg p-6">
+          <aside className="col-span-2 bg-white border border-gray-200 shadow-lg p-6">
             <nav>
               <ul className="space-y-4">
                 <li>

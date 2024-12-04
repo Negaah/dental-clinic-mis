@@ -1,5 +1,8 @@
 "use client";
+import Link from "next/link";
+import CreateAppointmentsForm from "../../components/form_appointments";
 import { useEffect, useState } from "react";
+
 import apiClient from "../lib/api";
 // Icons for pagination
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
@@ -37,6 +40,8 @@ const Appointments = () => {
 
   return (
     <div>
+       
+            
       {/* Appointments Table */}
       <table className="w-full border-collapse border border-gray-200 shadow-lg rounded-lg mb-10 mt-2">
         <thead className="bg-gradient-to-r from-blue-500 to-blue-600 text-white">
@@ -125,7 +130,9 @@ const Appointments = () => {
           <FaArrowRight className="w-4 h-4" />
         </button>
       </div>
+      <CreateAppointmentsForm/>
     </div>
+
   );
 };
 
