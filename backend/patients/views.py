@@ -10,8 +10,6 @@ from .models import Patient, Dentist, Appointment, Treatment, TreatmentRecord, I
 from .serializers import PatientSerializer, DentistSerializer, AppointmentSerializer, TreatmentSerializer, TreatmentRecordSerializer, InvoiceSerializer
 from rest_framework.filters import SearchFilter
 
-
-
 @api_view(['POST'])
 def register(request):
     if request.method == 'POST':
@@ -35,8 +33,6 @@ class PatientViewSet(viewsets.ModelViewSet):
     serializer_class = PatientSerializer
     filter_backends = [SearchFilter]
     search_fields = ['full_name', 'phone', 'address','gender']
-
-
 
 class DentistViewSet(viewsets.ModelViewSet):
     queryset = Dentist.objects.all()
