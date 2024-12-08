@@ -3,9 +3,10 @@ import { useEffect, useState } from "react";
 import apiClient from "../lib/api";
 import CreatePatientForm from "../../components/form_patients";
 // ICON part
+import { FaHospitalUser } from "react-icons/fa";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { useForm } from "react-hook-form";
-
+import Link from "next/link";
 const Patients = () => {
 
   const {
@@ -59,7 +60,7 @@ const Patients = () => {
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
-  console.log(data)
+
   return (
     <>
       <main className="col-span-7 bg-white">
@@ -86,15 +87,20 @@ const Patients = () => {
                       <th className="px-4 py-2 text-left text-sm font-semibold">
                         Address
                       </th>
+                      <th className="px-4 py-2 text-left text-sm font-semibold">
+                        Profile
+                      </th>
                     </tr>
                   </thead>
                   <tbody>
                     {data.map((patient, index) => (
+
                       <tr
                         key={patient.id}
                         className={`${index % 2 === 0 ? "bg-gray-50" : "bg-white"
                           } hover:bg-blue-100 transition-colors`}
                       >
+
                         <td className="px-4 py-2 text-sm border-b border-gray-200">
                           {patient.id}
                         </td>
@@ -113,7 +119,13 @@ const Patients = () => {
                         <td className="px-4 py-2 text-sm border-b border-gray-200">
                           {patient.address}
                         </td>
+                        <td>
+                          <Link href={`Patients/${patient.id}`}>
+                            <FaHospitalUser />
+                          </Link>
+                        </td>
                       </tr>
+
                     ))}
                   </tbody>
                 </table>
