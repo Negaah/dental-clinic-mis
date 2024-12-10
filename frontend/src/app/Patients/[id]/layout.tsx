@@ -3,8 +3,6 @@
 import { useEffect, useState } from "react";
 import apiClient from "../../lib/api";
 import Link from "next/link";
-
-
 export default function RootLayout(
   {
     children,
@@ -17,7 +15,7 @@ export default function RootLayout(
 
 
   const [resolvedParams, setResolvedParams] = useState<{ id: string } | null>(null);
-  const [data, setData] = useState<any>(null); // To store the patient data
+  const [data, setData] = useState<any>([null]); // To store the patient data
   const [loading, setLoading] = useState(true); // To manage loading state
   const [error, setError] = useState<Error | null>(null); // To manage error state
 
@@ -74,8 +72,8 @@ export default function RootLayout(
       <section className="col-span-3 bg-gray-50 p-4 space-y-4">
         <div className="bg-white p-4 shadow rounded-md flex flex-col">
           <Link href={`/Patients/${resolvedParams.id}`}>Appointments</Link>
-          <Link href="/Patients/update/">Update</Link>
-          <Link href="/">Delete</Link>
+          <Link href={`/Patients/${resolvedParams.id}/updates`}>Update</Link>
+          <Link href={`/`}>Delete</Link>
         </div>
       </section>
     </>

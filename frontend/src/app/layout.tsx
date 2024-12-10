@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import "./styles/globals.css";
-import CreatePatientForm from "../components/form_patients";
 
 export const metadata: Metadata = {
   title: "Create Next App",
