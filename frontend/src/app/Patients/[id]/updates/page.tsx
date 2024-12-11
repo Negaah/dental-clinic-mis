@@ -1,7 +1,7 @@
 const Update = () => {
     return (
         <div>
-            Upfdte
+         here we can update the data
         </div>
     );
 }

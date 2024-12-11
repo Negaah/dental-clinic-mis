@@ -26,6 +26,9 @@ const Patients = () => {
   const [count, setCount] = useState(0); // To store total number of patients
   const [currentLink, setCurrentLink] = useState("/patients/?search="); // Initial API endpoint
 
+
+
+  // SEARCH Function
   const onSubmit = async (data) => {
     try {
       setSearch(data.search)
@@ -37,10 +40,9 @@ const Patients = () => {
     }
   };
 
-
+// PageInation Function
   const fetchData = async (url) => {
     try {
-
       const response = await apiClient.get(url); // Fetch data from API
       setData(response.data.results || []); // Update the data state
       setNextLink(response.data.next || null); // Set next page URL
@@ -53,6 +55,7 @@ const Patients = () => {
       setLoading(false);
     }
   };
+
 
   useEffect(() => {
     fetchData(currentLink); // Fetch data when component mounts
@@ -93,6 +96,7 @@ const Patients = () => {
                     </tr>
                   </thead>
                   <tbody>
+                    
                     {data.map((patient, index) => (
 
                       <tr
