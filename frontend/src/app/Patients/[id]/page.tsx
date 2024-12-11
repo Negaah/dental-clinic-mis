@@ -1,56 +1,33 @@
 'use client'
 import { useState, useEffect } from "react";
-import apiClient from "../../lib/api";
+import useFetch from "../../hooks/useFetch";
 
-const page = (
-    {
-        params,
-    }: {
-        params: Promise<{ id: string }>;
-    }
-) => {
+const page = ({ params }: { params: Promise<{ id: string }> }) => {
     const [resolvedParams, setResolvedParams] = useState<{ id: string } | null>(null);
-    const [data, setData] = useState<any>([null]);
-    const [loading, setLoading] = useState(true); // To manage loading state
-    const [error, setError] = useState<Error | null>(null); // To manage error state
 
     useEffect(() => {
         const resolveParams = async () => {
-            const resolved = await params; // Resolve the promise
-            setResolvedParams(resolved); // Store the resolved params
+            const resolved = await params;
+            setResolvedParams(resolved);
         };
 
         resolveParams();
     }, [params]);
 
-    const fetchData = async () => {
-        if (!resolvedParams) return; // Ensure params are resolved before fetching
-        try {
-            const response = await apiClient.get(`/patients/${resolvedParams.id}/`); // Fetch data from API
-            setData(response.data.appointments || {}); // Update the data state
-        } catch (error) {
-            console.error("Error fetching data:", error);
-            setError(error as Error);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    useEffect(() => {
-        if (resolvedParams) {
-            fetchData(); // Fetch data once params are resolved
-        }
-    }, [resolvedParams]); // Fetch when resolvedParams changes
+    const { data, loading, error } = useFetch(
+        resolvedParams ? `/patients/${resolvedParams.id}/` : "",
+        { method: "GET" }
+    );
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error.message}</p>;
-    console.log(data, '--------------------------------------')
+
     return (
         <div>
             <table className="w-full border-collapse border border-gray-200 shadow-lg rounded-lg mb-10 mt-2">
                 <thead className="bg-gradient-to-r from-blue-500 to-blue-600 text-white">
                     <tr>
-                        <th className="px-4 py-2 text-left text-sm font-semibold"># </th>
+                        <th className="px-4 py-2 text-left text-sm font-semibold">#</th>
                         <th className="px-4 py-2 text-left text-sm font-semibold">Patient</th>
                         <th className="px-4 py-2 text-left text-sm font-semibold">Dentist</th>
                         <th className="px-4 py-2 text-left text-sm font-semibold">Date</th>
@@ -60,7 +37,7 @@ const page = (
                     </tr>
                 </thead>
                 <tbody>
-                    {data.map((appointment, index) => (
+                    {data?.appointments?.map((appointment: any, index: number) => (
                         <tr
                             key={appointment.id}
                             className={`${index % 2 === 0 ? "bg-gray-50" : "bg-white"
@@ -100,6 +77,6 @@ const page = (
             </table>
         </div>
     );
-}
+};
 
 export default page;
