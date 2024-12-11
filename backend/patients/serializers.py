@@ -17,10 +17,6 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
             email=validated_data['email']
         )
         return user
-class PatientSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Patient
-        fields = '__all__'
 
 class DentistSerializer(serializers.ModelSerializer):
     class Meta:
@@ -41,8 +37,11 @@ class AppointmentSerializer(serializers.ModelSerializer):
             'patient': {'write_only': True},  # Patient ID used for creation/update
             'dentist': {'write_only': True},  # Dentist ID used for creation/update
         }
-
-
+class PatientSerializer(serializers.ModelSerializer):
+    appointments = AppointmentSerializer(many=True, read_only=True) 
+    class Meta:
+        model = Patient
+        fields = '__all__'
 
 class TreatmentSerializer(serializers.ModelSerializer):
     class Meta:
