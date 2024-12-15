@@ -1,8 +1,26 @@
-'use client'
+"use client";
 import { useState, useEffect } from "react";
 import useFetch from "../../hooks/useFetch";
 
-const page = ({ params }: { params: Promise<{ id: string }> }) => {
+
+
+// Paiman's Changes here
+
+interface Appointment {
+    id: string;
+    patient_name: string;
+    dentist_name: string;
+    appointment_date: string;
+    appointment_time: string;
+    status: "Scheduled" | "Completed" | "Cancelled";
+    notes?: string;
+}
+
+interface AppointmentsData {
+    appointments: Appointment[];
+}
+
+const Page = ({ params }: { params: Promise<{ id: string }> }) => {
     const [resolvedParams, setResolvedParams] = useState<{ id: string } | null>(null);
 
     useEffect(() => {
@@ -14,13 +32,25 @@ const page = ({ params }: { params: Promise<{ id: string }> }) => {
         resolveParams();
     }, [params]);
 
-    const { data, loading, error } = useFetch(
+
+    // Paiman's Changes here
+    // Wait for resolvedParams before fetching data
+    const { data, loading, error } = useFetch<AppointmentsData>(
         resolvedParams ? `/patients/${resolvedParams.id}/` : "",
         { method: "GET" }
     );
 
+    // Conditional renders
+    if (!resolvedParams) return <p>Resolving parameters...</p>;
     if (loading) return <p>Loading...</p>;
-    if (error) return <p>Error: {error.message}</p>;
+    if (error)
+        return (
+            <p>
+                Error: {error.message}
+                <br />
+                Please check your internet connection or contact support.
+            </p>
+        );
 
     return (
         <div>
@@ -37,11 +67,12 @@ const page = ({ params }: { params: Promise<{ id: string }> }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {data?.appointments?.map((appointment: any, index: number) => (
+                    {data?.appointments.map((appointment, index) => (
                         <tr
                             key={appointment.id}
-                            className={`${index % 2 === 0 ? "bg-gray-50" : "bg-white"
-                                } hover:bg-blue-100 transition-colors`}
+                            className={`${
+                                index % 2 === 0 ? "bg-gray-50" : "bg-white"
+                            } hover:bg-blue-100 transition-colors`}
                         >
                             <td className="px-4 py-2 text-sm border-b border-gray-200">{index + 1}</td>
                             <td className="px-4 py-2 text-sm border-b border-gray-200">
@@ -58,12 +89,13 @@ const page = ({ params }: { params: Promise<{ id: string }> }) => {
                             </td>
                             <td className="px-4 py-2 text-sm border-b border-gray-200">
                                 <span
-                                    className={`px-3 py-1 inline-flex text-xs font-semibold rounded-full ${appointment.status === "Scheduled"
-                                        ? "bg-yellow-100 text-yellow-600"
-                                        : appointment.status === "Completed"
+                                    className={`px-3 py-1 inline-flex text-xs font-semibold rounded-full ${
+                                        appointment.status === "Scheduled"
+                                            ? "bg-yellow-100 text-yellow-600"
+                                            : appointment.status === "Completed"
                                             ? "bg-green-100 text-green-600"
                                             : "bg-red-100 text-red-600"
-                                        }`}
+                                    }`}
                                 >
                                     {appointment.status}
                                 </span>
@@ -79,4 +111,4 @@ const page = ({ params }: { params: Promise<{ id: string }> }) => {
     );
 };
 
-export default page;
+export default Page;

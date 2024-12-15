@@ -56,67 +56,67 @@ export default function RootLayout(
 
   return (
     <>
-      <main className="col-span-7 bg-white">
-        <div className="min-h-screen font-[family-name:var(--font-geist-sans)]">
-          {/* Profile Picture Section */}
-          <div className="relative flex flex-col items-center mt-10">
-            <div className="w-32 h-32 rounded-full border-4 border-white overflow-hidden shadow-lg flex items-center justify-center bg-blue-100">
-              <FaUserCircle className="text-blue-500 text-6xl" />
-            </div>
-          </div>
-
-          {/* Patient Info Section */}
-          <div className="mt-6 px-10">
-            <div className="text-center">
-              <h1 className="text-2xl font-bold text-gray-800">{data?.full_name}</h1>
-              <p className="text-gray-600">Gender: {data?.gender}</p>
-            </div>
-
-            {/* Patient Details in Rows */}
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-10 ">
-              <div className="flex items-center space-x-4">
-                <FaPhoneAlt className="text-blue-500" />
-                <div>
-                  <span className="font-medium text-gray-700">Phone:</span>
-                  <span className="block text-gray-800">{data?.phone}</span>
-                </div>
-              </div>
-              <div className="flex items-center space-x-4">
-                <FaCalendarAlt className="text-blue-500" />
-                <div>
-                  <span className="font-medium text-gray-700">DOB:</span>
-                  <span className="block text-gray-800">{data?.dob}</span>
-                </div>
-              </div>
-              <div className="flex items-center space-x-4">
-                <FaMapMarkerAlt className="text-blue-500" />
-                <div>
-                  <span className="font-medium text-gray-700">Address:</span>
-                  <span className="block text-gray-800">{data?.address}</span>
-                </div>
-              </div>
-              <div className="flex items-center space-x-4">
-                <FaNotesMedical className="text-blue-500" />
-                <div>
-                  <span className="font-medium text-gray-700">Medical History:</span>
-                  <span className="block text-gray-800">{data?.medical_history}</span>
-                </div>
-              </div>
-            </div>
-
-
-          </div>
-
-          {/* Children Section */}
-          <div className="mt-10 px-10">
-            <hr className="border-t border-gray-300" />
-            <div className="mt-6">
-              {children}
-            </div>
+    <main className="col-span-7 bg-white">
+      <div className="min-h-screen font-[family-name:var(--font-geist-sans)]">
+        {/* Profile Picture Section */}
+        <div className="relative flex flex-col items-center mt-10">
+          <div className="w-32 h-32 rounded-full border-4 border-white overflow-hidden shadow-lg flex items-center justify-center bg-blue-100">
+            <FaUserCircle className="text-blue-500 text-6xl" />
           </div>
         </div>
-      </main>
+
+        {/* Patient Info Section */}
+        <div className="mt-6 px-10">
+          <div className="text-center">
+            <h1 className="text-2xl font-bold text-gray-800">{data?.full_name}</h1>
+            <p className="text-gray-600">Gender: {data?.gender}</p>
+          </div>
+
+          {/* Patient Details in Rows */}
+       
+             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-10 ">
+            <div className="flex items-center space-x-4">
+              <FaPhoneAlt className="text-blue-500" />
+              <div>
+                <span className="font-medium text-gray-700">Phone:</span>
+                <span className="block text-gray-800">{data?.phone}</span>
+              </div>
+            </div>
+            <div className="flex items-center space-x-4">
+              <FaCalendarAlt className="text-blue-500" />
+              <div>
+                <span className="font-medium text-gray-700">DOB:</span>
+                <span className="block text-gray-800">{data?.dob}</span>
+              </div>
+            </div>
+            <div className="flex items-center space-x-4">
+              <FaMapMarkerAlt className="text-blue-500" />
+              <div>
+                <span className="font-medium text-gray-700">Address:</span>
+                <span className="block text-gray-800">{data?.address}</span>
+              </div>
+            </div>
+            <div className="flex items-center space-x-4">
+              <FaNotesMedical className="text-blue-500" />
+              <div>
+                <span className="font-medium text-gray-700">Medical History:</span>
+                <span className="block text-gray-800">{data?.medical_history}</span>
+              </div>
+            </div>
+             </div>
+        
+
+        </div>
+
+        {/* Children Section */}
+        <div className="mt-10 px-10">
+          <hr className="border-t border-gray-300" />
+          <div className="mt-6">
+            {children}
+          </div>
+        </div>
+      </div>
+    </main>
 
       <section className="col-span-3 bg-gray-50 p-4 space-y-4">
         <div className="bg-white p-4 shadow rounded-md flex flex-col">

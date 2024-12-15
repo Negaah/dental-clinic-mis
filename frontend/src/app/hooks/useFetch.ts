@@ -1,3 +1,6 @@
+ // Paiman's Changes here
+
+
 import { useState, useEffect } from "react";
 import apiClient from "../lib/api";
 
@@ -6,8 +9,10 @@ interface UseFetchOptions {
     body?: any;
 }
 
-const useFetch = (url: string, options: UseFetchOptions = { method: "GET" }) => {
-    const [data, setData] = useState<any>(null);
+
+ // Paiman's Changes here
+const useFetch = <T = any>(url: string, options: UseFetchOptions = { method: "GET" }) => {
+    const [data, setData] = useState<T | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<Error | null>(null);
 
@@ -21,7 +26,7 @@ const useFetch = (url: string, options: UseFetchOptions = { method: "GET" }) => 
                     method: options.method,
                     data: options.body,
                 });
-                setData(response.data);
+                setData(response.data as T);
             } catch (err) {
                 setError(err as Error);
             } finally {
@@ -29,7 +34,7 @@ const useFetch = (url: string, options: UseFetchOptions = { method: "GET" }) => 
             }
         };
 
-        fetchData();
+        if (url) fetchData(); // Ensure URL is not empty before fetching
     }, [url, options.method, options.body]);
 
     return { data, loading, error };

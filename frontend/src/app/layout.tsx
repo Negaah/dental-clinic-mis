@@ -24,7 +24,7 @@ export default function RootLayout({
                 placeholder="Search..."
                 className="p-2 pl-10 bg-blue-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all"
               />
-              <svg
+              <svg    
                 xmlns="http://www.w3.org/2000/svg"
                 className="w-5 h-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-white"
                 fill="none"

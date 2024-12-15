@@ -36,14 +36,30 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+
+# Paiman's changes
+# CORS_ALLOW_METHODS = [
+#     "GET",
+#     "POST",
+#     "PUT",
+#     "DELETE",
+#     "OPTIONS",
+# ]
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:3000",
+#     "https://localhost:3000",
+# ]
+# Paiman's changes end
+
 
 ROOT_URLCONF = 'dental_clinic.urls'
 CORS_ALLOW_ALL_ORIGINS = True
@@ -75,7 +91,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'test',  # نام دیتابیس شما
         'USER': 'postgres',  # نام کاربری دیتابیس شما
-        'PASSWORD': 'admin',  # رمز عبور دیتابیس شما
+        'PASSWORD': 'password2005',  # رمز عبور دیتابیس شما
         'HOST': 'localhost',  # معمولاً برای سرور محلی localhost است
         'PORT': '5432',  # پورت پیش‌فرض PostgreSQL
     }
