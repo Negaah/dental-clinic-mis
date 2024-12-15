@@ -74,14 +74,8 @@ export default function RootLayout({
             </nav>
           </aside>
 
-          {/* Main */}
 
           {children}
-
-
-          {/* Right Section */}
-
-
 
           {/* Footer */}
           <footer className="col-span-12 bg-gray-800 text-white text-center p-4">
