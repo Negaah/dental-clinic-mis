@@ -4,15 +4,15 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import axios from 'axios';
-import { useRouter } from 'next/navigation';
 
 // تعریف اسکیمای اعتبارسنجی Zod
 const schema = z.object({
-    username: z.string().nonempty({ message: 'نام کاربری نمی‌تواند خالی باشد' }),
-    password: z.string().nonempty({ message: 'رمز عبور نمی‌تواند خالی باشد' }),
+    username: z.string().min(3, { message: 'نام کاربری باید حداقل ۳ حرف باشد' }),
+    email: z.string().email({ message: 'ایمیل معتبر وارد کنید' }),
+    password: z.string().min(6, { message: 'رمز عبور باید حداقل ۶ حرف باشد' }),
 });
 
-export default function Login() {
+export default function Register() {
     const {
         register,
         handleSubmit,
@@ -20,14 +20,13 @@ export default function Login() {
     } = useForm({
         resolver: zodResolver(schema),
     });
-    const router = useRouter();
+
     const onSubmit = async (data: any) => {
         try {
-            const response = await axios.post('http://127.0.0.1:8888/api/token/', data);
-            localStorage.setItem('accessToken', response.data.access);
-            router.push('/');
+            const response = await axios.post('http://127.0.0.1:8888/api/register/', data);
+            alert('ثبت‌نام موفقیت‌آمیز بود!');
         } catch (error) {
-            alert('نام کاربری یا رمز عبور اشتباه است');
+            alert('خطایی در ثبت‌نام رخ داد');
         }
     };
 
@@ -36,14 +35,19 @@ export default function Login() {
             <div>
                 <label>نام کاربری:</label>
                 <input {...register('username')} placeholder="نام کاربری" />
-                {errors.username && <p>{errors.username.message}</p>}
+                {errors.username && <p className='bg-red-300'>{errors.username.message}</p>}
+            </div>
+            <div>
+                <label>ایمیل:</label>
+                <input {...register('email')} placeholder="ایمیل" />
+                {errors.email && <p>{errors.email.message}</p>}
             </div>
             <div>
                 <label>رمز عبور:</label>
                 <input {...register('password')} type="password" placeholder="رمز عبور" />
                 {errors.password && <p>{errors.password.message}</p>}
             </div>
-            <button type="submit">ورود</button>
+            <button type="submit">ثبت‌نام</button>
         </form>
     );
 }
