@@ -23,7 +23,7 @@ export default function Register() {
 
     const onSubmit = async (data: any) => {
         try {
-            const response = await axios.post('http://127.0.0.1:8888/api/register/', data);
+            const response = await axios.post('http://127.0.0.1:8000/api/register/', data);
             alert('ثبت‌نام موفقیت‌آمیز بود!');
         } catch (error) {
             alert('خطایی در ثبت‌نام رخ داد');

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./styles/globals.css";
+import LogoutButton from '@/components/LogoutButton';
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -11,6 +12,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+
   return (
     <html lang="en">
       <body className="antialiased">
@@ -18,13 +20,15 @@ export default function RootLayout({
           {/* Header */}
           <header className="col-span-12 bg-blue-800 text-white p-4 shadow-md  flex justify-between items-center">
             <div className="text-2xl font-bold tracking-wide">Logo</div>
+            <LogoutButton />
+
             <div className="relative">
               <input
                 type="text"
                 placeholder="Search..."
                 className="p-2 pl-10 bg-blue-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all"
               />
-              <svg    
+              <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="w-5 h-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-white"
                 fill="none"

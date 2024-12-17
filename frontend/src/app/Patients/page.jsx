@@ -7,6 +7,9 @@ import { FaHospitalUser } from "react-icons/fa";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
+
+import AuthGuard from '@/components/authGuard';
+
 const Patients = () => {
 
   const {
@@ -40,7 +43,7 @@ const Patients = () => {
     }
   };
 
-// PageInation Function
+  // PageInation Function
   const fetchData = async (url) => {
     try {
       const response = await apiClient.get(url); // Fetch data from API
@@ -65,7 +68,7 @@ const Patients = () => {
   if (error) return <p>Error: {error.message}</p>;
 
   return (
-    <>
+    <AuthGuard>
       <main className="col-span-7 bg-white">
         <div className="min-h-screen font-[family-name:var(--font-geist-sans)]">
           {/* Patient Table */}
@@ -96,7 +99,7 @@ const Patients = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    
+
                     {data.map((patient, index) => (
 
                       <tr
@@ -202,7 +205,7 @@ const Patients = () => {
         </div>
         <CreatePatientForm />
       </section>
-    </>
+    </AuthGuard>
   );
 };
 

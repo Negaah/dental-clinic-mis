@@ -23,8 +23,13 @@ export default function Login() {
     const router = useRouter();
     const onSubmit = async (data: any) => {
         try {
-            const response = await axios.post('http://127.0.0.1:8888/api/token/', data);
+            const response = await axios.post('http://127.0.0.1:8000/api/token/', data);
             localStorage.setItem('accessToken', response.data.access);
+            localStorage.setItem('refreshToken', response.data.refresh);
+            document.cookie = `accessToken=${response.data.access}; path=/;`; // ذخیره در کوکی
+
+
+
             router.push('/');
         } catch (error) {
             alert('نام کاربری یا رمز عبور اشتباه است');
