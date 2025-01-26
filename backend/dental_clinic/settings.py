@@ -62,6 +62,7 @@ MIDDLEWARE = [
 
 
 ROOT_URLCONF = 'dental_clinic.urls'
+
 CORS_ALLOW_ALL_ORIGINS = True
 
 TEMPLATES = [
